@@ -22,6 +22,10 @@ Potential users will need to clone the code to their local machine as well as in
 
 Users are prompted to enter required team member data starting with the manager. Once the user has completed creating employees, the web page will be generated.
 
+![alt text](./dist/images/screenshot.png)
+
+[Link to video demonstration](https://watch.screencastify.com/v/8hBEDbk2TvLUxlK1WZjy)
+
 ##  Tests
 
 Jest was used for testing on the Employee, Manager, Engineer and Intern objects.
