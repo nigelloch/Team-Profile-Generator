@@ -7,8 +7,8 @@ const Engineer = require("./lib/Engineer.js");
 const Employee = require("./lib/Employee.js");
 let teamMembers = [];
 
-const createManager = () => {
-  return inquirer
+const createManager = async() => {
+  return inquirer 
     .prompt([
       {
         type: "input",
@@ -72,7 +72,7 @@ const createManager = () => {
 };
 
 const createEmployee = () => {
-  return inquirer
+  inquirer
     .prompt([
       {
         type: "list",
@@ -119,7 +119,7 @@ const createEmployee = () => {
       },
       {
         type: "input",
-        message: "What is the Engineer's Github username?",
+        message: "What is the Employee's Github username?",
         name: "github",
         when: (input) => input.role === "Engineer",
         validate: (value) => {
@@ -132,8 +132,8 @@ const createEmployee = () => {
       },
       {
         type: "input",
-        message: "What is the Intern's school name?",
-        name: "github",
+        message: "What is the Employee's school name?",
+        name: "school",
         when: (input) => input.role === "Intern",
         validate: (value) => {
           if (value) {
@@ -151,19 +151,18 @@ const createEmployee = () => {
       },
     ])
     .then((result) => {
-      const employee = new Employee(
-        result.name,
-        result.id,
-        result.email,
-        result.github,
-        result.school
-      );
-      teamMembers.push(employee);
+      if (result.role === 'Intern') {
+        const newIntern = new Intern(result.name, result.id, result.email, result.school)
+        teamMembers.push(newIntern);
+      } else {
+        const newEngineer = new Engineer(result.name, result.id, result.email, result.github)
+        teamMembers.push(newEngineer);
+      } 
 
       if (result.addEmployees) {
-          return createEmployee(teamMembers);
+          createEmployee();
     } else {
-        return teamMembers;
+       writeToFile('./dist/index.html', generateTeam(teamMembers));
         }
     });
 };
@@ -180,12 +179,4 @@ function writeToFile(fileName, data) {
 
 createManager()
     .then(createEmployee)
-    .then(teamMembers => {
-        return generateTeam(teamMembers);
-    })
-    .then(html => {
-        return writeToFile('./dist/index.html', html)
-    })
-    .catch(err => {
-        console.log(err);
-    });
+

@@ -1,12 +1,13 @@
 const Manager = require("../lib/Manager");
 const Engineer = require("../lib/Engineer");
 const Intern = require("../lib/Intern");
-//const Employee = require("../lib/Employee");
+const Employee = require("../lib/Employee");
 
 function createCards(team) {
-    let cards = [];
+    let teamCards = ``;
     for (let i = 0; i < team.length; i++) {
       const teamArray = team[i];
+      console.log(teamArray.getRole())
       switch (teamArray.getRole()) {
         case "Manager":
           const manager = new Manager(
@@ -15,29 +16,32 @@ function createCards(team) {
             teamArray.email,
             teamArray.officeNumber,
           );
-          cards.push(managerCard(manager));
+          teamCards += managerCard(manager);
           break;
+
         case "Engineer":
           const engineer = new Engineer(
-            teamArray.id,
             teamArray.name,
+            teamArray.id,
             teamArray.email,
             teamArray.github,
           );
-          cards.push(engineerCard(engineer));
+          teamCards += (engineerCard(engineer));
           break;
+
         case "Intern":
           const intern = new Intern(
-            teamArray.id,
             teamArray.name,
+            teamArray.id,
             teamArray.email,
             teamArray.school,
           );
-          cards.push(internCard(intern));
+          teamCards += (internCard(intern));
           break;
+          
       }
     }
-    return cards.join(``);
+    return teamCards;
   }
 
 let managerCard = (Manager) => {
@@ -46,8 +50,8 @@ let managerCard = (Manager) => {
         <div class="d-flex mt-5 justify-content-center ">
             <div class="card" style="width: 18rem">
               <div class="card-body">
-                <h3 class="card-title bg-primary text-white">${Manager.name}</h3>
-                <h4 class="card-title">Manager</h4>
+                <h3 class="card-title manager-style text-white">${Manager.name}</h3>
+                <h4 class="card-title"><i class="fas fa-mug-hot"></i>Manager</h4>
                 <div class='text-left'>
                     <ul>
                         <li class='id'>ID: ${Manager.id}</li>
@@ -59,6 +63,7 @@ let managerCard = (Manager) => {
             </div>
           </div>
     </div>
+  <div class="row justify-content-center">
     `
 }
 
@@ -67,8 +72,8 @@ let engineerCard = (Engineer) => {
     <div class=" text-center">
             <div class="card" style="width: 18rem">
             <div class="card-body">
-              <h3 class="card-title bg-primary text-white">${Engineer.name}</h3>
-              <h4 class="card-text">Engineer</h4>
+              <h3 class="card-title engineer-style text-white">${Engineer.name}</h3>
+              <h4 class="card-text"><i class="fas fa-cog"></i>Engineer</h4>
               <div class='text-left'>
                 <ul>
                     <li class='id'>ID: ${Engineer.id}</li>
@@ -87,12 +92,12 @@ let internCard = (Intern) => {
     <div class=" text-center">
             <div class="card" style="width: 18rem">
             <div class="card-body">
-                <h3 class="card-title bg-primary text-white">${Intern.name}</h3>
-                <h4 class="card-text">Intern</h4>
+                <h3 class="card-title intern-style text-white">${Intern.name}</h3>
+                <h4 class="card-text"><i class="fas fa-graduation-cap"></i>Intern</h4>
                 <div class='text-left'>
                   <ul>
                       <li class='id'>ID: ${Intern.id}</li>
-                      <li class='email'>Email: <a href="${Intern.email}">${engineer.email}</a></li>
+                      <li class='email'>Email: <a href="${Intern.email}">${Intern.email}</a></li>
                       <li class='office'>School: ${Intern.school}</li>
                   </ul>
               </div>
@@ -103,7 +108,6 @@ let internCard = (Intern) => {
 }
 
 function generateTeam(team) {
-  console.log(team);
   return `
 
 <!DOCTYPE html>
@@ -113,14 +117,16 @@ function generateTeam(team) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/22f818f507.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <title>My Team</title>
 </head>
 <body>
-    <header class='text-center col-12 mb-2 bg-primary text-white header'>
+    <header class='text-center col-12 mb-2 header-style text-white header'>
         <h1>My Team</h1>
     </header>
 ${createCards(team)}
+</div>
 </body>
 </html>
 `;
