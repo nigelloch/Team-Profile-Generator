@@ -55,7 +55,7 @@ let managerCard = (Manager) => {
                 <div class='text-left'>
                     <ul>
                         <li class='id'>ID: ${Manager.id}</li>
-                        <li class='email'>Email: <a href="${Manager.email}">${Manager.email}</a></li>
+                        <li class='email'>Email: <a href="mailto:${Manager.email}">${Manager.email}</a></li>
                         <li class='office'>Office Number: ${Manager.officeNumber}</li>
                     </ul>
                 </div>
@@ -77,8 +77,8 @@ let engineerCard = (Engineer) => {
               <div class='text-left'>
                 <ul>
                     <li class='id'>ID: ${Engineer.id}</li>
-                    <li class='email'>Email: <a href="${Engineer.email}">${Engineer.email}</a></li>
-                    <li class='github'>Github: ${Engineer.github}</li>
+                    <li class='email'>Email: <a href="mailto:${Engineer.email}">${Engineer.email}</a></li>
+                    <li class='github'>Github: <a href="https://github.com/${Engineer.github}">${Engineer.github}</li>
                 </ul>
             </div>
             </div>
@@ -97,7 +97,7 @@ let internCard = (Intern) => {
                 <div class='text-left'>
                   <ul>
                       <li class='id'>ID: ${Intern.id}</li>
-                      <li class='email'>Email: <a href="${Intern.email}">${Intern.email}</a></li>
+                      <li class='email'>Email: <a href="mailto:${Intern.email}">${Intern.email}</a></li>
                       <li class='office'>School: ${Intern.school}</li>
                   </ul>
               </div>
