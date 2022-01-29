@@ -11,7 +11,7 @@ The Team Profile Generator is a console application that allows you to assemble 
 * [Usage](#usage)
 * [Tests](#tests)
 * [License](#license)
-* [Contributors/Resources](#contributors)
+* [Contributors/Resources](#contributors/resources)
 * [Questions](#questions)
 
 ##  Installation
